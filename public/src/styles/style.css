@@ -1,0 +1,16 @@
+.gnb ul {
+  text-align: center;
+  margin: 10px;
+}
+
+.gnb ul li {
+  display: inline-block;
+  padding: 8px;
+  background-color: #aaaaaa;
+}
+
+.page {
+  margin: auto;
+  width: 80%;
+  background-color: red;
+}
