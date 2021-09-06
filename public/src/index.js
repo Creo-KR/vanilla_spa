@@ -1,5 +1,7 @@
 import App from "./core/app.js";
+import { getPath } from "./core/route.js";
 
-const path = window.location.pathname.replace(/\/html\//, "");
-const $body = document.body;
-const app = new App({ $parent: $body, initialState: path });
+const app = new App({
+  parent: { $target: document.body },
+  initialState: { path: getPath() },
+});

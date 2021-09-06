@@ -7,10 +7,10 @@ app.listen(port, () => {
 });
 
 app.get("/", (req, res) => {
-  res.redirect("/html/");
+  res.redirect("/spa/");
 });
 
-app.get("/html/*", (req, res) => {
+app.get("/spa/*", (req, res) => {
   res.send(`<html>
 <head>
     <title>SPA 페이지</title>

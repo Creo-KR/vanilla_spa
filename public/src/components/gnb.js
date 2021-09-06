@@ -17,12 +17,10 @@ export default class Gnb extends Component {
   }
 
   template() {
-    return `
-        <ul>
+    return `<ul>
           <li data-path="./" >Main</li>
           <li data-path="./gallery" >Gallery</li>
-        </ul>
-      `;
+        </ul>`;
   }
 
   render() {
