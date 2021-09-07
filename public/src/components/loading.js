@@ -2,7 +2,7 @@ import Component from "../core/component.js";
 
 export default class Loading extends Component {
   async init() {
-    this.className = "loading";
+    this.className = "loading full blur";
   }
 
   template() {

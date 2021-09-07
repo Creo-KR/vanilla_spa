@@ -2,7 +2,7 @@ import Component from "../core/component.js";
 
 export default class ImageViewer extends Component {
   async init() {
-    this.className = "image-viewer";
+    this.className = "image-viewer full blur";
   }
 
   template() {
@@ -11,7 +11,7 @@ export default class ImageViewer extends Component {
 
   addEvent() {
     this.$target.addEventListener("click", (e) => {
-      if (e.target.tagName == "DIV") {
+      if (e.target.className.indexOf("image-viewer") > -1) {
         this.destroy();
       }
     });

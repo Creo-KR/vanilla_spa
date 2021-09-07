@@ -11,7 +11,9 @@ export default class App extends Component {
   async init() {
     this.tagName = "main";
     this.className = "App";
+  }
 
+  addEvent() {
     window.onpopstate = (e) => {
       this.setState({ path: getPath() });
     };

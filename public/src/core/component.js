@@ -6,21 +6,24 @@ export default class Component {
     this.parent = parent;
     this.state = initialState;
     this.event = { ...this.event, ...event };
-    this.setup();
+
+    const setup = async () => {
+      await this.init();
+      this.$target = document.createElement(this.tagName);
+      this.className && (this.$target.className = this.className);
+      this.parent.appendChild
+        ? this.parent.appendChild(this)
+        : this.parent.$target.appendChild(this.$target);
+      this.addEvent();
+      this.render();
+      this.event.rendered && this.event.rendered();
+    };
+    setup();
   }
 
-  async setup() {
-    await this.init();
-    this.$target = document.createElement(this.tagName);
-    this.className && (this.$target.className = this.className);
-    this.parent.appendChild
-      ? this.parent.appendChild(this)
-      : this.parent.$target.appendChild(this.$target);
-    this.addEvent();
-    this.render();
-    this.event.rendered && this.event.rendered();
-  }
-
+  /**
+   * not yet created $target.
+   */
   async init() {}
 
   render() {}
