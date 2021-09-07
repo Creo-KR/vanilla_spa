@@ -1,7 +1,7 @@
 import Component from "../core/component.js";
 
 export default class MainPage extends Component {
-  init() {
+  async init() {
     this.className = "page main";
   }
 

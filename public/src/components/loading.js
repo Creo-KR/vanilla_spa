@@ -1,7 +1,7 @@
 import Component from "../core/component.js";
 
 export default class Loading extends Component {
-  init() {
+  async init() {
     this.className = "loading";
   }
 

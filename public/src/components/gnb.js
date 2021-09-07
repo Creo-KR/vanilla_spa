@@ -2,11 +2,11 @@ import Component from "../core/component.js";
 import { move } from "../core/route.js";
 
 export default class Gnb extends Component {
-  init() {
+  async init() {
     this.className = "gnb";
   }
 
-  setEvent() {
+  addEvent() {
     this.$target.addEventListener("click", (e) => {
       const $li = e.target;
       if ($li.tagName == "LI") {

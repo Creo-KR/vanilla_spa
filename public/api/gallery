@@ -1,0 +1,32 @@
+[
+  {
+    "id":1,
+    "name":"First",
+    "imageUrl":"http://localhost:5000/images/01.jpg"
+  },
+  {
+    "id":2,
+    "name":"Second",
+    "imageUrl":"http://localhost:5000/images/02.jpg"
+  },
+  {
+    "id":3,
+    "name":"Third",
+    "imageUrl":"http://localhost:5000/images/03.jpg"
+  },
+  {
+    "id":4,
+    "name":"Fourth",
+    "imageUrl":"http://localhost:5000/images/04.jpg"
+  },
+  {
+    "id":5,
+    "name":"Fifth",
+    "imageUrl":"http://localhost:5000/images/05.jpg"
+  },
+  {
+    "id":6,
+    "name":"Sixth",
+    "imageUrl":"http://localhost:5000/images/06.jpg"
+  }
+]

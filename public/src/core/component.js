@@ -1,28 +1,31 @@
 export default class Component {
-  $target;
   tagName = "div";
-  className;
-  parent;
-  state;
+  event = { rendered: false };
 
-  constructor({ parent, initialState }) {
+  constructor({ parent, initialState, event }) {
     this.parent = parent;
     this.state = initialState;
-    this.init();
-    this.$target = document.createElement(this.tagName);
-    this.className && (this.$target.className = this.className);
-    parent.appendChild
-      ? parent.appendChild(this)
-      : parent.$target.appendChild(this.$target);
-    this.setEvent();
-    this.render();
+    this.event = { ...this.event, ...event };
+    this.setup();
   }
 
-  init() {}
+  async setup() {
+    await this.init();
+    this.$target = document.createElement(this.tagName);
+    this.className && (this.$target.className = this.className);
+    this.parent.appendChild
+      ? this.parent.appendChild(this)
+      : this.parent.$target.appendChild(this.$target);
+    this.addEvent();
+    this.render();
+    this.event.rendered && this.event.rendered();
+  }
+
+  async init() {}
 
   render() {}
 
-  setEvent() {}
+  addEvent() {}
 
   appendChild(child) {
     this.$target.appendChild(child.$target);
@@ -33,16 +36,11 @@ export default class Component {
   }
 
   setState(newState) {
-    console.log("this.state : " + JSON.stringify(this.state));
-    console.log("newState : " + JSON.stringify(newState));
-    console.log("...this.state : " + JSON.stringify({ ...this.state }));
-    console.log("...newState : " + JSON.stringify({ ...newState }));
-    console.log(
-      "{ ...this.state, ...newState } : " +
-        JSON.stringify({ ...this.state, ...newState })
-    );
     this.state = { ...this.state, ...newState };
-    console.log("new this.state : " + JSON.stringify(this.state));
     this.render();
+  }
+
+  destroy() {
+    this.$target.parentNode.removeChild(this.$target);
   }
 }
