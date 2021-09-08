@@ -6,6 +6,8 @@ import List from "../components/list.js";
 import GalleryViewer from "../components/galleryViewer.js";
 
 export default class GalleryPage extends Component {
+  state = { items: [], ...this.state };
+
   async init() {
     this.className = "page gallery";
 

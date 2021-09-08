@@ -1,6 +1,7 @@
 import Component from "../core/component.js";
 
 export default class GalleryViewer extends Component {
+  state = { id: 0, name: "", imageUrl: "", ...this.state };
   event = { delete: false, ...this.event };
 
   async init() {
