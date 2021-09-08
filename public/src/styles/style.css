@@ -102,5 +102,32 @@
 }
 
 .tab .tab-list {
+  background-color: #8cb9b9;
+}
+
+.tab .tab-list li {
+  display: inline-block;
+  border: 2px solid black;
+  padding: 5px;
   background-color: #11aaac;
+  cursor: pointer;
+}
+
+.tab .tab-list li.on {
+  font-weight: bold;
+  background-color: #00f9fd;
+}
+
+.tab .tab-list .add {
+  font-weight: bold;
+  background-color: #eeeeee;
+}
+
+.tab .tab-list .remove {
+  font-weight: bold;
+  color: red;
+}
+
+.tab .tab-contents {
+  background-color: white;
 }
