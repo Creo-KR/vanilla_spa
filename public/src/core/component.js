@@ -1,10 +1,11 @@
 export default class Component {
   tagName = "div";
+  state = {};
   event = { rendered: false };
 
   constructor({ parent, initialState, event }) {
     this.parent = parent;
-    this.state = initialState;
+    this.state = { ...this.state, ...initialState };
     this.event = { ...this.event, ...event };
 
     const setup = async () => {

@@ -1,13 +1,17 @@
-import { request } from "./api.js";
+import { getPath } from "./route.js";
+
 import Component from "./component.js";
 
-import MainPage from "../pages/main.js";
-import Gnb from "../components/gnb.js";
-import GalleryPage from "../pages/gallery.js";
-import { getPath } from "./route.js";
 import Loading from "../components/loading.js";
+import Gnb from "../components/gnb.js";
+
+import MainPage from "../pages/main.js";
+import GalleryPage from "../pages/gallery.js";
+import NotePage from "../pages/note.js";
 
 export default class App extends Component {
+  state = { path: "", ...this.state };
+
   async init() {
     this.tagName = "main";
     this.className = "App";
@@ -40,6 +44,12 @@ export default class App extends Component {
     switch (this.state.path) {
       case "gallery":
         this.page = new GalleryPage({
+          parent: this,
+          event: { rendered: this.onPageRendered },
+        });
+        break;
+      case "note":
+        this.page = new NotePage({
           parent: this,
           event: { rendered: this.onPageRendered },
         });

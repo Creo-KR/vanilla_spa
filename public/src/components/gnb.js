@@ -10,8 +10,7 @@ export default class Gnb extends Component {
     this.$target.addEventListener("click", (e) => {
       const $li = e.target;
       if ($li.tagName == "LI") {
-        let { path } = $li.dataset;
-        move({ path });
+        move({ path: $li.dataset["path"] });
       }
     });
   }
@@ -20,6 +19,7 @@ export default class Gnb extends Component {
     return `<ul>
           <li data-path="./" >Main</li>
           <li data-path="./gallery" >Gallery</li>
+          <li data-path="./note" >Note</li>
         </ul>`;
   }
 

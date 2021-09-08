@@ -3,13 +3,13 @@ import Component from "../core/component.js";
 import { request } from "../core/api.js";
 import GalleryItem from "../components/galleryItem.js";
 import List from "../components/list.js";
-import ImageViewer from "../components/imageViewer.js";
+import GalleryViewer from "../components/galleryViewer.js";
 
 export default class GalleryPage extends Component {
   async init() {
     this.className = "page gallery";
 
-    this.items = await request("gallery");
+    this.state = { items: await request("gallery") };
   }
 
   addEvent() {
@@ -18,33 +18,46 @@ export default class GalleryPage extends Component {
       if (item) {
         let id = item.dataset["id"];
 
-        this.viewer = new ImageViewer({
+        this.viewer = new GalleryViewer({
           parent: this,
           initialState: this.getItem(id),
+          event: { delete: this.deleteItem },
         });
       }
     });
   }
 
   render() {
+    this.$target.innerHTML = "";
+
     this.$title = document.createElement("h1");
     this.$title.innerText = "Gallery Page";
     this.$target.appendChild(this.$title);
 
     this.list = new List({ parent: this });
 
-    this.items &&
-      this.items.map((item) => {
+    this.state.items &&
+      this.state.items.map((item) => {
         new GalleryItem({ parent: this.list, initialState: item });
       });
   }
 
   getItem(id) {
-    for (let i in this.items) {
-      if (this.items[i].id == id) {
-        return this.items[i];
+    for (let i in this.state.items) {
+      if (this.state.items[i].id == id) {
+        return this.state.items[i];
       }
     }
     return null;
   }
+
+  deleteItem = (id) => {
+    for (let i in this.state.items) {
+      if (this.state.items[i].id == id) {
+        this.state.items.splice(i, 1);
+      }
+    }
+
+    this.setState(this.state);
+  };
 }
