@@ -83,7 +83,7 @@ export default class NotePage extends Component {
     let newState = { tabs: this.parseTab() };
 
     if (
-      this.tab.state.tabs.length == this.tab.state.index ||
+      this.tab.state.tabs.length - 1 == this.tab.state.index ||
       this.tab.state.index > index
     )
       newState.index = this.tab.state.index - 1;
