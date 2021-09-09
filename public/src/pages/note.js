@@ -58,9 +58,7 @@ export default class NotePage extends Component {
   }
 
   templateContents() {
-    return `<div>
-              created on ${new Date().toISOString()}
-            </div>`;
+    return `created on ${new Date().toISOString()}`;
   }
 
   addTab = () => {
