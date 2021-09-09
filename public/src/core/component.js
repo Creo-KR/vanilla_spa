@@ -12,9 +12,10 @@ export default class Component {
       await this.init();
       this.$target = document.createElement(this.tagName);
       this.className && (this.$target.className = this.className);
-      this.parent.appendChild
-        ? this.parent.appendChild(this)
-        : this.parent.$target.appendChild(this.$target);
+      if (this.parent)
+        this.parent.appendChild
+          ? this.parent.appendChild(this)
+          : this.parent.$target.appendChild(this.$target);
       this.addEvent();
       this.render();
       this.event.rendered && this.event.rendered();
@@ -32,6 +33,7 @@ export default class Component {
   addEvent() {}
 
   appendChild(child) {
+    child.parent = this;
     this.$target.appendChild(child.$target);
   }
 
