@@ -13,10 +13,6 @@ export default class NotePage extends Component {
     if (data) this.state = JSON.parse(data);
   }
 
-  template() {
-    return "Note Page";
-  }
-
   render() {
     this.$target.innerHTML = "";
 
