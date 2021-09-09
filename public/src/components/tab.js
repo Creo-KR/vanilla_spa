@@ -1,9 +1,10 @@
 import Component from "../core/component.js";
+import TabContents from "./tabContents.js";
 
 export default class Tab extends Component {
   state = {
     index: 0,
-    tabs: [{ name: "Tab1", contents: "" }],
+    tabs: [{ name: "Tab", contents: "" }],
     buttons: { add: false, remove: false },
     ...this.state,
   };
@@ -61,9 +62,9 @@ export default class Tab extends Component {
       this.$tabList.appendChild($tabButton);
     }
 
-    this.$tabContents = document.createElement("div");
-    this.$tabContents.className = "tab-contents";
-    this.$target.appendChild(this.$tabContents);
-    this.$tabContents.innerHTML = this.state.tabs[this.state.index].contents;
+    this.contents = new TabContents({
+      parent: this,
+      initialState: { contents: this.state.tabs[this.state.index].contents },
+    });
   }
 }

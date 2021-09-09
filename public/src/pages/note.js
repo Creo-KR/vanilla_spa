@@ -2,15 +2,22 @@ import Tab from "../components/tab.js";
 import Component from "../core/component.js";
 
 export default class NotePage extends Component {
-  state = { tabs: [{ name: "TAB0", contents: "first tab" }], ...this.state };
+  state = {
+    data: [
+      {
+        title: "TAB0",
+        contents: this.templateContents(),
+      },
+    ],
+    ...this.state,
+  };
 
   seq = 1;
 
   async init() {
     this.className = "page note";
 
-    const data = localStorage["data-note"];
-    if (data) this.state = JSON.parse(data);
+    this.load();
   }
 
   render() {
@@ -23,32 +30,66 @@ export default class NotePage extends Component {
     this.tab = new Tab({
       parent: this,
       initialState: {
-        tabs: this.state.tabs,
+        tabs: this.parseTab(),
         buttons: { add: true, remove: true },
       },
       event: { add: this.addTab, remove: this.removeTab },
     });
   }
 
-  addTab = () => {
-    this.state.tabs.push({
-      name: `TAB${this.seq++}`,
-      contents: `created on ${new Date().toISOString()}`,
-    });
-    this.tab.setState({ index: this.state.tabs.length - 1 });
-
+  save() {
     localStorage["data-note"] = JSON.stringify(this.state);
+  }
+
+  load() {
+    const data = localStorage["data-note"];
+    if (data) this.state = JSON.parse(data);
+  }
+
+  parseTab() {
+    let tabs = [];
+    this.state.data.map((data) => {
+      tabs.push({
+        name: data.title,
+        contents: data.contents,
+      });
+    });
+    return tabs;
+  }
+
+  templateContents() {
+    return `<div>
+              created on ${new Date().toISOString()}
+            </div>`;
+  }
+
+  addTab = () => {
+    this.state.data.push({
+      title: `TAB${this.seq++}`,
+      contents: this.templateContents(),
+    });
+
+    this.tab.setState({
+      index: this.state.data.length - 1,
+      tabs: this.parseTab(),
+    });
+
+    this.save();
   };
 
   removeTab = (index) => {
-    this.state.tabs.splice(index, 1);
+    this.state.data.splice(index, 1);
 
-    let newState = {};
-    if (this.tab.state.index >= index)
+    let newState = { tabs: this.parseTab() };
+
+    if (
+      this.tab.state.tabs.length == this.tab.state.index ||
+      this.tab.state.index > index
+    )
       newState.index = this.tab.state.index - 1;
 
     this.tab.setState(newState);
 
-    localStorage["data-note"] = JSON.stringify(this.state);
+    this.save();
   };
 }
