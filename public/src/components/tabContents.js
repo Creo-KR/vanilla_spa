@@ -10,7 +10,7 @@ export default class TabContents extends Component {
   template() {
     return `<p>
               ${this.state.contents}
-            <p>`;
+            </p>`;
   }
 
   render() {
