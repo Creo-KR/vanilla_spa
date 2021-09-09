@@ -12,6 +12,12 @@ import NotePage from "../pages/note.js";
 export default class App extends Component {
   state = { path: "", ...this.state };
 
+  routes = {
+    main: MainPage,
+    gallery: GalleryPage,
+    note: NotePage,
+  };
+
   async init() {
     this.tagName = "main";
     this.className = "App";
@@ -41,24 +47,11 @@ export default class App extends Component {
 
     this.page && this.removeChild(this.page);
 
-    switch (this.state.path) {
-      case "gallery":
-        this.page = new GalleryPage({
-          parent: this,
-          event: { rendered: this.onPageRendered },
-        });
-        break;
-      case "note":
-        this.page = new NotePage({
-          parent: this,
-          event: { rendered: this.onPageRendered },
-        });
-        break;
-      default:
-        this.page = new MainPage({
-          parent: this,
-          event: { rendered: this.onPageRendered },
-        });
-    }
+    const page = this.routes[this.state.path] || this.routes.main;
+
+    this.page = new page({
+      parent: this,
+      event: { rendered: this.onPageRendered },
+    });
   }
 }
