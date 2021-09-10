@@ -131,3 +131,21 @@
 .tab .tab-contents {
   background-color: white;
 }
+
+.note .note-button {
+  font-size: 15pt;
+}
+
+.note .note-contents {
+  height: 100%;
+  white-space: pre;
+  font-size: 12pt;
+  font-family: sans-serif;
+}
+
+.note textarea {
+  width: 100%;
+  height: 100%;
+  font-size: 12pt;
+  font-family: sans-serif;
+}

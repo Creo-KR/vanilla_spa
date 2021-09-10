@@ -8,9 +8,7 @@ export default class TabContents extends Component {
   }
 
   template() {
-    return `<p>
-              ${this.state.contents}
-            </p>`;
+    return `${this.state.contents}`;
   }
 
   render() {

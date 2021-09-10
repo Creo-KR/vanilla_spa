@@ -6,7 +6,8 @@ export default class NotePage extends Component {
     data: [
       {
         title: "TAB0",
-        contents: this.templateContents(),
+        isEditable: false,
+        contents: "",
       },
     ],
     ...this.state,
@@ -18,6 +19,15 @@ export default class NotePage extends Component {
     this.className = "page note";
 
     this.load();
+  }
+
+  addEvent() {
+    this.$target.addEventListener("click", (e) => {
+      let button = e.target.closest(".note-button");
+      if (button) {
+        this.edit(e);
+      }
+    });
   }
 
   render() {
@@ -46,25 +56,45 @@ export default class NotePage extends Component {
     if (data) this.state = JSON.parse(data);
   }
 
+  edit(e) {
+    let data = this.state.data[this.tab.state.index];
+    data.isEditable = !data.isEditable;
+
+    if (!data.isEditable) {
+      let noteText = e.target
+        .closest(".tab-contents")
+        .querySelector("textarea").value;
+      data.contents = noteText;
+
+      this.save();
+    }
+
+    this.tab.state.tabs[this.tab.state.index].contents =
+      this.templateContents(data);
+    this.tab.setState();
+  }
+
   parseTab() {
     let tabs = [];
     this.state.data.map((data) => {
       tabs.push({
         name: data.title,
-        contents: data.contents,
+        contents: this.templateContents(data),
       });
     });
     return tabs;
   }
 
-  templateContents() {
-    return `created on ${new Date().toISOString()}`;
+  templateContents({ isEditable, contents }) {
+    return isEditable
+      ? `<div><a class="note-button edit">✔</a></div><div class="note-contents"><textarea>${contents}</textarea></div>`
+      : `<div><a class="note-button edit">🖊</a></div><div class="note-contents"><p>${contents}</p></div>`;
   }
 
   addTab = () => {
     this.state.data.push({
       title: `TAB${this.seq++}`,
-      contents: this.templateContents(),
+      contents: `created on ${new Date().toISOString()}`,
     });
 
     this.tab.setState({
