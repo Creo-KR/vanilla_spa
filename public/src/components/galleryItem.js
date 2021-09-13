@@ -1,6 +1,8 @@
 import Component from "../core/component.js";
 
 export default class GalleryItem extends Component {
+  state = { imageUrl: "", name: "", ...this.state };
+
   async init() {
     this.tagName = "li";
     this.className = "gallery-item";
