@@ -17,9 +17,9 @@ export default class Gnb extends Component {
 
   template() {
     return `<ul>
-          <li data-path="./" >Main</li>
-          <li data-path="./gallery" >Gallery</li>
-          <li data-path="./note" >Note</li>
+          <li data-path="./">Main</li>
+          <li data-path="./gallery">Gallery</li>
+          <li data-path="./note">Note</li>
         </ul>`;
   }
 
