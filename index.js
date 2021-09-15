@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const port = 5000;
 
+const { getMetaData } = require("./seo.js");
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
@@ -16,6 +18,7 @@ app.get("/spa/*", (req, res) => {
     <title>SPA 페이지</title>
     <link rel="stylesheet" href="../src/styles/reset.css">
     <link rel="stylesheet" href="../src/styles/style.css">
+    ${getMetaData()}
     <script type="module" src="../src/index.js"></script>
 </head>
 <body>
